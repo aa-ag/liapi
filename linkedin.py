@@ -5,18 +5,14 @@ import settings
 
 ############------------ GLOBAL VARIABLE(S) ------------############
 authorization_code = settings.authorization_code
+           
 
-headers = {'Content-Type': 'application/json',
-           'X-Restli-Protocol-Version': '2.0.0',
-           'Authorization': f'Bearer {authorization_code}'}
-           
-           
 ############------------ FUNCTION(S) ------------############
 def get_user_info():
     '''
      hit endpoint and retreive user info
     '''
-    response = requests.get('https://api.linkedin.com/v2/me', headers=headers)
+    response = requests.get(f'https://api.linkedin.com/v2/me?oauth2_access_token={authorization_code}')
 
     print(response.status_code)
 
