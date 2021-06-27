@@ -3,7 +3,7 @@ import requests
 import settings
 
 ############------------ GLOBAL VARIABLE(S) ------------############
-
+authorization_code = settings.authorization_code
            
 ############------------ FUNCTION(S) ------------############
 def get_user_info():
