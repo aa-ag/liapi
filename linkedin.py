@@ -35,8 +35,23 @@ def retreive_access_token():
     return access_token['access_token']
 
 
+def retreive_user_info():
+    linkedin_user_profile_endpoint = 'https://api.linkedin.com/v2/me'
+
+    request = requests.get(linkedin_user_profile_endpoint, headers={
+        'Authorization': f'Bearer {settings.access_token}'})
+    
+    return request.json()
+
 ############------------ DRIVER CODE ------------############
 if __name__ == "__main__":
     # generate_authorization_url()
 
-    print(retreive_access_token())
+    # print(retreive_access_token())
+
+    print(retreive_user_info())
+    '''
+     {'localizedLastName': 'A.', 
+     'profilePicture': {'displayImage': 'urn:li:digitalmediaAsset:C5603AQEyFqtQX3Zp9Q'}, 
+     ...
+    '''
