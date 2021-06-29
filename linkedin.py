@@ -21,6 +21,11 @@ def generate_authorization_url():
 
 
 def retreive_access_token():
+    '''
+     uses authorization url generated in previous function
+     to hit accessToken endpoint and generate, well, you guessed it: 
+     an accessToken
+    '''
     access_token_endpoint = 'https://www.linkedin.com/oauth/v2/accessToken?'
     a = 'grant_type=authorization_code&'
     b = f'code={settings.authorization_code}&'
@@ -36,6 +41,11 @@ def retreive_access_token():
 
 
 def retreive_user_info():
+    '''
+     uses access_token retreived in 
+     retreive_access_token() to retreive
+     user info
+    '''
     linkedin_user_profile_endpoint = 'https://api.linkedin.com/v2/me'
 
     request = requests.get(linkedin_user_profile_endpoint, headers={
