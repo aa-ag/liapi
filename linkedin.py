@@ -32,10 +32,7 @@ def retreive_access_token():
 
     access_token = requests.post(url).json()
 
-    return access_token
-
-
-
+    return access_token['access_token']
 
 
 ############------------ DRIVER CODE ------------############
