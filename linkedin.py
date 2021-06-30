@@ -1,6 +1,8 @@
 ############------------ IMPORTS ------------############
 import requests
 import secrets
+
+from requests.api import post
 import settings
 
 
@@ -53,15 +55,44 @@ def retreive_user_info():
     
     return request.json()
 
+
+def post_on_linkedin():
+    endpoint_to_post_text_on_linkedin = 'https://api.linkedin.com/v2/ugcPosts'
+
+    to_be_posted = {
+    "author": f"urn:li:person:{settings.user_id}",
+    "lifecycleState": "PUBLISHED",
+    "specificContent": {
+        "com.linkedin.ugc.ShareContent": {
+            "shareCommentary": {
+                "text": "testing linkedin's api: a Roman soldier walks into a bar, sticks two fingers up and says, \"five beers please.\""
+            },
+            "shareMediaCategory": "NONE"
+        }
+    },
+    "visibility": {
+            "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
+        }
+    }
+
+    request = requests.post(endpoint_to_post_text_on_linkedin, headers={
+        'Authorization': f'Bearer {settings.access_token}',
+        'X-Restli-Protocol-Version': '2.0.0'}, json=to_be_posted)
+    
+    if request.status_code == 201:
+        print("Success")
+        print(request.content)
+    else:
+        print(request.content)
+    
+    
+
 ############------------ DRIVER CODE ------------############
 if __name__ == "__main__":
     # generate_authorization_url()
 
     # print(retreive_access_token())
 
-    print(retreive_user_info())
-    '''
-     {'localizedLastName': 'A.', 
-     'profilePicture': {'displayImage': 'urn:li:digitalmediaAsset:C5603AQEyFqtQX3Zp9Q'}, 
-     ...
-    '''
+    # print(retreive_user_info())
+
+    post_on_linkedin()
