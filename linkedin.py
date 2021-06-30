@@ -57,6 +57,13 @@ def retreive_user_info():
 
 
 def post_on_linkedin():
+    '''
+     sets (i) endpoint that needs to be hit to post text
+     (ii) sets json object with content necessary to post text
+     per documentation, (iii) sets post request with required 
+     headers, (iv) checks if connection is made successfully 
+     and if so, posts to feed
+    '''
     endpoint_to_post_text_on_linkedin = 'https://api.linkedin.com/v2/ugcPosts'
 
     to_be_posted = {
