@@ -87,7 +87,7 @@ def post_on_linkedin():
         'X-Restli-Protocol-Version': '2.0.0'}, json=to_be_posted)
     
     if request.status_code == 201:
-        print("Success")
+        print("Posted.")
         print(request.content)
     else:
         print(request.content)
