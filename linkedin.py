@@ -1,8 +1,9 @@
 ############------------ IMPORTS ------------############
+### Python
 import requests
 import secrets
-
 from requests.api import post
+### Project-specific
 import settings
 
 
@@ -13,13 +14,13 @@ def generate_authorization_url():
      retreive authorization code according to
      documentation: https://tinyurl.com/5umjmm42
     '''
-    a = 'https://www.linkedin.com/oauth/v2/authorization?'
-    b = 'response_type=code&'
-    c = f'client_id={settings.client_id}&'
-    d = f'redirect_uri={settings.linkedin_redirect}&'
-    e = f'state={secrets.token_hex(8).upper()}&'
-    f = 'scope=r_liteprofile%20r_emailaddress%20w_member_social'
-    print(a + b + c + d + e + f)
+    i = 'https://www.linkedin.com/oauth/v2/authorization?'
+    ii = 'response_type=code&'
+    iii = f'client_id={settings.client_id}&'
+    iv = f'redirect_uri={settings.linkedin_redirect}&'
+    v = f'state={secrets.token_hex(8).upper()}&'
+    vi = 'scope=r_liteprofile%20r_emailaddress%20w_member_social'
+    print(i + ii + iii + iv + v + vi)
 
 
 def retreive_access_token():
@@ -29,13 +30,13 @@ def retreive_access_token():
      an accessToken
     '''
     access_token_endpoint = 'https://www.linkedin.com/oauth/v2/accessToken?'
-    a = 'grant_type=authorization_code&'
-    b = f'code={settings.authorization_code}&'
-    c = f'redirect_uri={settings.linkedin_redirect}&'
-    d = f'client_id={settings.client_id}&'
-    e = f'client_secret={settings.client_secret}'
+    i = 'grant_type=authorization_code&'
+    ii = f'code={settings.authorization_code}&'
+    iii = f'redirect_uri={settings.linkedin_redirect}&'
+    iv = f'client_id={settings.client_id}&'
+    v = f'client_secret={settings.client_secret}'
 
-    url = access_token_endpoint + a + b + c + d + e
+    url = access_token_endpoint + i + ii + iii + iv + v
 
     access_token = requests.post(url).json()
 
